@@ -46,12 +46,30 @@ where you'd normally put a URL:
 
 Currently this is not supported recursively.
 
-### Custom Templates
-To make real use of this package, you will need to create your own templates.
+## Updating your site changes from hyde-bootstrap
+When hyde-bootstrap inevitably gets updated after after you've generated your
+site and you want to incorporate some or all of those changes into your site,
+you can use `git cherry-pick` to selectively grab the commits you want.
 
-You can subclass `topbar.j2` or `base.j2` to cover most use cases. All of the
-templates that are provided serve as a starting point and as an example of
-possible approaches you can use.
+Let's assume your website is its own git repository, with no more ties to the
+hyde-bootstrap.
+
+First, set up hyde-bootstrap as a remote and fetch its changes:
+
+    git remote add hyde-bootstrap git://github.com/aims-group/hyde-bootstrap
+    git fetch hyde-bootstrap
+
+Fetching doesn't overwrite anything or try to merge any code (pulling does).
+Once you've fetched changes, you can cherry-pick the ones you want. If you just
+want the changes performed by the most recent commit, you can do
+
+    git cherry-pick hyde-bootstrap/master
+
+Otherwise you can specify a specific commit hash or use one of several other
+ways of specifying commits. See `man git-cherry-pick` for more info.
+
+When you're done, just `git commit`, add to the prepopulated commit message if
+you like, and you're ready to push.
 
 ### Adding Content
 Look at all of the `.html` files in the `content` directory for an example of
