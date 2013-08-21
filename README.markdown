@@ -46,6 +46,36 @@ where you'd normally put a URL:
 
 Currently this is not supported recursively.
 
+### Carousels
+To implement a carousel, make a list of items similar to navigation items like
+so:
+
+    context:
+      data:
+        carousel:
+          - caption: Test caption
+            image: /path/to/background/image.png
+          - caption: Another test caption
+            image: /path/to/another/image.png
+
+You'll have to set your carousel's div and arrows manually, then call
+`render_carousel_items`:
+
+    <div class="carousel-inner">
+      <div class="item peopleCarouselImg active"><!-- class of active since it's the first item -->
+        <div class="carousel-caption">
+          <p>This is your initial carousel item, if you choose to specify one. It behaves
+          just like every other item but is the first to be displayed.</p>
+        </div>
+      </div>
+      {% from "macros.j2" import render_carousel_items with context %}
+      {{ render_carousel_items(carousel) }}
+    </div>
+    <a class="carousel-control left" href="#hero-carousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#hero-carousel" data-slide="next">&rsaquo;</a>
+
+See [aims-group/uvcdat-site][]'s index.html for a live example.
+
 ## Updating your site changes from hyde-bootstrap
 When hyde-bootstrap inevitably gets updated after after you've generated your
 site and you want to incorporate some or all of those changes into your site,
@@ -112,3 +142,4 @@ Contributions by [Anand S](https://github.com/anandtrex).
 [aims-group/webshooter]: https://github.com/aims-group/webshooter
 [auzigog/hyde-bootstrap]: https://github.com/auzigog/hyde-bootstrap
 [h5bp/html5-boilerplate]: https://github.com/h5bp/html5-boilerplate
+[aims-group/uvcdat-site]: https://github.com/aims-group/uvcdat-site
